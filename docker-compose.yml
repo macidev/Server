@@ -2,6 +2,10 @@ version: '3.8'
 include:
   - path: container/mastodon.yml
 #  - path: services/rustdesk.yml # check if yml is correct
+# bookstack
+# collabora
+# commento oder Ähnliches
+# ggf. leantime
 
 services:
   traefik:

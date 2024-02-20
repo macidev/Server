@@ -22,4 +22,3 @@ services:
       - ./data:/root
     network_mode: "host"
     restart: unless-stopped
-c
