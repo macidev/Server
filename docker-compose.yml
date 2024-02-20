@@ -1,0 +1,33 @@
+version: '3.8'
+include:
+  - path: container/mastodon.yml
+#  - path: services/rustdesk.yml # check if yml is correct
+
+services:
+  traefik:
+      image: traefik:v3.0
+      restart: unless-stopped
+      ports:
+        - "443:443/tcp"
+        - "443:443/udp"
+      volumes:
+        - /var/run/docker/docker.sock:/var/run/docker.sock:ro
+        - acme-data:/acme
+      networks:
+        - traefik
+      command:
+        - --providers.docker=true
+        - --providers.docker.exposedbydefault=false
+
+        - --entrypoints.web.address=:80
+        - --entryPoints.web.http.redirections.entryPoint.to=websecure
+        - --entryPoints.web.http.redirections.entryPoint.scheme=https
+        - --entryPoints.web.http.redirections.entrypoint.permanent=true
+        - --entrypoints.websecure.address=:443
+        - --entrypoints.websecure.http3
+
+volumes:
+  acme-data:
+
+networks:
+  traefik:
