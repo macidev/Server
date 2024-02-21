@@ -1,0 +1,28 @@
+log:
+  level: DEBUG
+
+providers:
+  docker:
+    exposedByDefault: false
+    network: traefik_web
+
+entryPoints:
+  http:
+    address: ":80"
+    http:
+      redirections:
+        entryPoint:
+          to: "https"
+          scheme: "https"
+  https:
+    address: ":443"
+    http:
+      tls:
+        certResolver: le
+
+certificatesResolvers:
+  le:
+    acme:
+      tlsChallenge: {} #dnsChallenge: needed
+      email: e@mail.de
+      storage: "/letsencrypt/acme.json"

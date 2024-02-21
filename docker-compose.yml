@@ -17,23 +17,17 @@ services:
         - "443:443/udp"
         - "80:80"
       volumes:
-        #- /var/run/docker/docker.sock:/var/run/docker.sock:ro
-        - acme-data:/acme
+        - /var/run/docker/docker.sock:/var/run/docker.sock:ro
+        - ./letsencrypt:/letsencrypt
+        - ./traefik.yml:/traefik.yml
       networks:
-        - traefik
+        - traefik_web
       command:
-        - --providers.docker=true
-        - --providers.docker.exposedbydefault=false
-
-        - --entrypoints.web.address=:80
-        - --entryPoints.web.http.redirections.entryPoint.to=websecure
-        - --entryPoints.web.http.redirections.entryPoint.scheme=https
-        - --entryPoints.web.http.redirections.entrypoint.permanent=true
-        - --entrypoints.websecure.address=:443
-        - --entrypoints.websecure.http3
+        - "--providers.file.filename=/traefik.yml"
 
 volumes:
   acme-data:
 
 networks:
-  traefik:
+  web:
+    name: traefik_web
