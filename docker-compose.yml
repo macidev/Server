@@ -1,6 +1,7 @@
 version: '3.8'
-include:
-  - path: container/mastodon.yml
+#include:
+#  - path: container/test.yml
+#  - path: container/mastodon.yml
 #  - path: services/rustdesk.yml # check if yml is correct
 # bookstack
 # collabora
@@ -16,7 +17,7 @@ services:
         - "443:443/udp"
         - "80:80"
       volumes:
-        - /var/run/docker/docker.sock:/var/run/docker.sock:ro
+        #- /var/run/docker/docker.sock:/var/run/docker.sock:ro
         - acme-data:/acme
       networks:
         - traefik
@@ -36,4 +37,3 @@ volumes:
 
 networks:
   traefik:
-    external: true
