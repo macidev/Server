@@ -1,6 +1,6 @@
 version: '3.8'
-#include:
-#  - path: container/test.yml
+include:
+  - path: container/test.yml
 #  - path: container/mastodon.yml
 #  - path: services/rustdesk.yml # check if yml is correct
 # bookstack
@@ -17,11 +17,11 @@ services:
         - "443:443/udp"
         - "80:80"
       volumes:
-        - /var/run/docker/docker.sock:/var/run/docker.sock:ro
+        - /var/run/docker.sock:/var/run/docker.sock:ro
         - ./letsencrypt:/letsencrypt
         - ./traefik.yml:/traefik.yml
       networks:
-        - traefik_web
+        - traefik
       command:
         - "--providers.file.filename=/traefik.yml"
 
@@ -29,5 +29,5 @@ volumes:
   acme-data:
 
 networks:
-  web:
+  traefik:
     name: traefik_web
