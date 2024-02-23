@@ -9,8 +9,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.middlewares.compress.compress=true
-      - traefik.http.routers.demo.rule=Host(`test.local`)
-      - traefik.http.routers.demo.entrypoints=websecure
+      - traefik.http.routers.demo.rule=Host(`test.de`)
       - traefik.http.routers.demo.middlewares=compress
 
 networks:

@@ -1,6 +1,9 @@
 log:
   level: DEBUG
 
+api:
+  insecure: true
+
 providers:
   docker:
     exposedByDefault: false
@@ -9,11 +12,11 @@ providers:
 entryPoints:
   http:
     address: ":80"
-    http:
-      redirections:
-        entryPoint:
-          to: "https"
-          scheme: "https"
+#    http:
+#      redirections:
+#        entryPoint:
+#          to: "https"
+#          scheme: "https"
   https:
     address: ":443"
     http:
