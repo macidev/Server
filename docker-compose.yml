@@ -1,7 +1,7 @@
 version: '3.8'
 include:
   - path: container/test.yml
-#  - path: container/mastodon.yml
+  - path: container/mastodon.yml
 #  - path: services/rustdesk.yml # check if yml is correct
 # bookstack
 # collabora
@@ -29,3 +29,7 @@ services:
 networks:
   traefik:
     name: traefik_web
+  external_network:
+    name: mastodon_external_network
+  internal_network:
+    internal: true
